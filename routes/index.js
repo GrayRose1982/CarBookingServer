@@ -27,4 +27,11 @@ router.post('/account/login', function (req, res) {
     });
 });
 
+router.post('/account/getAllAccount', function (req, res) {
+        account.getAllAccount(function (found) {
+        console.log(found);
+        res.json(found);
+    });
+});
+
 module.exports = router;

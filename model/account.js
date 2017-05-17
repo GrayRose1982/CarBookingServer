@@ -71,3 +71,20 @@ exports.login = function (email, password, callback) {
        });
     });
 };
+
+//get all account
+exports.getAllAccount = function (callback) {
+    db.getConnection(function (err, client) {
+        if(err) {
+            return console.error('error running query', err);
+        }
+
+        var sql = "SELECT * FROM account";
+        client.query(sql, function (err, result) {
+            if(err) {
+                return console.error('error running query', err);
+            }
+            callback({'all data':result});
+        });
+    });
+};
