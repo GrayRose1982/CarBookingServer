@@ -61,12 +61,12 @@ exports.login = function (email, password, callback) {
                var password_db = result[0].hash_password;
                var token = result[0].token;
                if(password_db === hash_password) {
-                   callback({'response':"Login Success", 'res':true, 'token':token});
+                   callback({'response':"Login Success", 'email':true, 'password':true, 'token':token});
                } else {
-                   callback({'response':"Invalid Password", 'res':false});
+                   callback({'response':"Invalid Password", 'email':true, 'password':false, 'res':false});
                }
            } else {
-               callback({'response':"User not exist", 'res':false});
+               callback({'response':"User not exist", 'email':false, 'password':false, 'res':false});
            }
        });
     });
