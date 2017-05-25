@@ -38,7 +38,7 @@ exports.getOpenTicketByAccountId = function(account_id, callback) {
                 return console.error('error running query booked_ticket', err);
             }
 
-            sql = "SELECT gara.id, gara.name, gara.address, gara.picture, gara.total_slot, gara.busy_slot, gara.booking_slot, gara.location_x, location_y, location_z " +
+            sql = "SELECT DISTINCT gara.id, gara.name, gara.address, gara.picture, gara.total_slot, gara.busy_slot, gara.booking_slot, gara.location_x, location_y, location_z " +
                 "FROM booked_ticket, account, gara " +
                 "WHERE account.id = booked_ticket.account_id AND gara.id = booked_ticket.gara_id " +
                 "AND is_expired = 0 AND (checkin_time = '' OR checkout_time = '') " +
