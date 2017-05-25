@@ -30,7 +30,7 @@ exports.getOpenTicketByAccountId = function(account_id, callback) {
         }
 
         var sql = "SELECT booked_ticket.id, booked_ticket.booked_time, booked_ticket.checkin_time, booked_ticket.checkout_time, " +
-            "booked_ticket.gara_id, booked_ticket.account_id FROM booked_ticket, account WHERE account.id = booked_ticket.account_id " +
+            "booked_ticket.gara_id, booked_ticket.account_id, booked_ticket.is_expired FROM booked_ticket, account WHERE account.id = booked_ticket.account_id " +
             "AND is_expired = 0 AND (checkin_time = '' OR checkout_time = '') AND account.id = " + account_id + "";
         client.query(sql, function(err, result) {
             // db.endConnection();
