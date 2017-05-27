@@ -67,8 +67,8 @@ router.post('/ticket/add', function (req, res) {
 
 //get open booked ticket
 router.post('/ticket/getopenticket', function (req, res) {
-    var account_id = req.body.account_id;
-    ticket.getOpenTicketByAccountId(account_id, function (found) {
+    var token = req.body.token;
+    ticket.getOpenTicketByAccount(token, function (found) {
         // console.log(found);
         res.json(found);
     });

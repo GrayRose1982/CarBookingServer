@@ -23,7 +23,7 @@ exports.add = function(account_id, gara_id, booked_time, is_expired, checkin_tim
 };
 
 //get open ticket all
-exports.getOpenTicketByAccountId = function(account_id, callback) {
+exports.getOpenTicketByAccount = function(token, callback) {
     db.getConnection(function (err, client) {
         if(err) {
             return console.error('error fetching client from pool', err);
@@ -31,7 +31,7 @@ exports.getOpenTicketByAccountId = function(account_id, callback) {
 
         var sql = "SELECT booked_ticket.id, booked_ticket.booked_time, booked_ticket.checkin_time, booked_ticket.checkout_time, " +
             "booked_ticket.gara_id, booked_ticket.account_id, booked_ticket.is_expired FROM booked_ticket, account WHERE account.id = booked_ticket.account_id " +
-            "AND is_expired = 0 AND (checkin_time = '' OR checkout_time = '') AND account.id = " + account_id + "";
+            "AND is_expired = 0 AND (checkin_time = '' OR checkout_time = '') AND account.token = '" + token + "'";
         client.query(sql, function(err, result) {
             // db.endConnection();
             if(err) {
@@ -42,7 +42,7 @@ exports.getOpenTicketByAccountId = function(account_id, callback) {
                 "FROM booked_ticket, account, gara " +
                 "WHERE account.id = booked_ticket.account_id AND gara.id = booked_ticket.gara_id " +
                 "AND is_expired = 0 AND (checkin_time = '' OR checkout_time = '') " +
-                "AND account.id = " + account_id;
+                "AND account.token = '" + token + "'";
             client.query(sql, function (err, result2) {
                 if(err) {
                     return console.error('error running query gara', err);
