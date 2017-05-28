@@ -2,6 +2,7 @@ var express = require('express');
 var account = require('../model/account');
 var gara = require('../model/gara');
 var ticket = require('../model/booked_ticket');
+var token = require('../model/token');
 var router = express.Router();
 
 /* GET home page. */
@@ -72,6 +73,30 @@ router.post('/ticket/getopenticket', function (req, res) {
         // console.log(found);
         res.json(found);
     });
+});
+
+//endregion
+
+//region token
+//create
+router.post('/token/create', function (req, res) {
+    var ticket_id = req.body.id;
+
+    token.add(ticket_id, function (found) {
+        console.log(found);
+        res.json(found);
+    })
+});
+
+//validate
+router.post('/token/validate', function (req, res) {
+    var ticket_id = req.body.id;
+    var user_input = req.body.user_input;
+
+    token.validate(ticket_id, user_input, function (found) {
+        console.log(found);
+        res.json(found);
+    })
 });
 
 //endregion

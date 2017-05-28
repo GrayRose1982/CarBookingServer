@@ -1,0 +1,7 @@
+CREATE TABLE `token` (
+  `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `ticket_id` int(11) NOT NULL,
+  `token_number` varchar(4) NOT NULL,
+  `is_expired` tinyint(1) NOT NULL DEFAULT 0,
+    CONSTRAINT  FOREIGN KEY (`ticket_id`) REFERENCES `booked_ticket` (`id`)
+)
