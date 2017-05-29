@@ -41,7 +41,7 @@ exports.validate = function(ticket_id, token_input, callback) {
                     if(err) {
                         return console.error('error running query', err);
                     }
-                    callback({'res': true, 'data':{'is_valid_token': false}});
+                    callback({'res': true, 'data':{'is_valid_token': true}});
                 })
             } else {
                 callback({'res': true, 'data':{'is_valid_token': false}});
